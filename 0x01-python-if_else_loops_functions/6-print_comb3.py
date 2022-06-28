@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-for a in range(0, 9):
-    for b in range(1 + a, 10):
-        print("{:d}{:d}".format(a, b), end="")
-        if (a + b) is not 17:
-            print(",", end=" ")
-print()
+for num in range(0, 90):
+    if num % 10 > num / 10:
+        if num != 89:
+            print("{:02d}, ".format(num), end='')
+        else:
+            print("{:02d}".format(num))
