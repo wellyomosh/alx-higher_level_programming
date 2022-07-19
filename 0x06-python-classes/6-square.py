@@ -1,60 +1,73 @@
-#!/usr/bin/python3
+\#!/usr/bin/python3
+""" Square module """
+
+
 class Square:
-    __size = None
-    __position = None
+    """ Declares a square class """
 
-    def __init__(self, size=0, position=(0, 0)):
-        self.__size = size
-        if type(size) != int:
-            raise Exception("size must be an integer")
-        if size < 0:
-            raise Exception("size must be >= 0")
-        if (type(position[0]) != int or type(position[1]) != int):
-            raise Exception("position must be a tuple of 2 positive integers")
-        if len(position) != 2 or type(position) != tuple:
-            raise Exception("position must be a tuple of 2 positive integers")
-        if position[0] < 0 or position[1] < 0:
-            raise Exception("position must be a tuple of 2 positive integers")
-        else:
-            self.__position = position
+    def __init__(self, size=0, position=(0, 0)) -> None:
+        """
+        Intializes the attributes
+        Args:
+            size: size of square
+            position:  position of square
+        """
+        self.size = size
+        self.position = position
 
-    def area(self):
-        return (self.__size * self.__size)
-
-    def set_size(self, value):
-        if type(value) != int:
-            raise Exception("size must be an integer")
-        self.__size = value
-
-    def get_size(self):
+    @property
+    def size(self):
+        """ Gets the private attribute to be used in class """
         return self.__size
 
-    size = property(get_size, set_size)
-
-    def set_position(self, value):
-        if (type(value[0]) != int or type(value[1]) != int):
-            raise Exception("position must be a tuple of 2 positive integers")
-        if len(value) != 2 or type(value) != tuple:
-            raise Exception("position must be a tuple of 2 positive integers")
-        if value[0] < 0 or value[1] < 0:
-            raise Exception("position must be a tuple of 2 positive integers")
+    @size.setter
+    def size(self, value):
+        if type(value) is not int:
+            raise TypeError("size must be an integer")
+        elif value < 0:
+            raise ValueError("size must be >= 0")
         else:
-            self.__position = value
+            self.__size = value
 
-    def get_position(self):
+    @property
+    def position(self):
+        """ Gets the private attribute to be used in class """
         return self.__position
 
-    position = property(get_position, set_position)
+    @position.setter
+    def position(self, value):
+        if type(value) is not tuple or len(value) != 2:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        elif type(value[0]) is not int or value[0] < 0:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        elif type(value[1]) is not int or value[1] < 0:
+            raise TypeError("position must be a tuple of 2 positive integers")
+        else:
+            self.__position = value     # tuple contains 2 positive integers
+
+    def area(self):
+        """ Computes area of a square """
+        return self.__size ** 2
 
     def my_print(self):
+        """ Prints in stdout the square with the character # """
         if self.__size == 0:
             print()
         else:
-            for j in range(self.__position[1]):
+            integer = 0
+            pos1, pos2 = self.__position
+            for new_line in range(pos2):
                 print()
-            for i in range(self.__size):
-                for k in range(self.__position[0]):
-                    print(' ', end='')
-                for i in range(self.__size):
-                    print('#', end='')
+            while integer < self.__size:
+
+                j = 0
+                while j < pos1:
+                    print(" ", end='')  # replace position with space
+                    j += 1
+
+                number = 0
+                while number < self.__size:
+                    print("{}".format("#"), end='')
+                    number += 1
                 print()
+                integer += 1
