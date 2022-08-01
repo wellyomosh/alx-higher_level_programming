@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""The ``MyList`` module"""
+""" MyList module """
 
 
 class MyList(list):
-    """MyList inherting from the ``list`` class"""
+    """ MyList class """
 
     def print_sorted(self):
-        """Print the list as sorted"""
+        """ print_sorted function """
         print(sorted(self))
